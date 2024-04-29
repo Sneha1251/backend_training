@@ -1,4 +1,3 @@
-console.log("hello");
 const { add, sub, mult, div } = require("../lib/math");
 
 const readLine = require("readline-sync");
@@ -20,3 +19,4 @@ fs.writeFile(
     console.log("Saved!");
   }
 );
+

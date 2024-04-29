@@ -16,4 +16,5 @@ const div = (num1, num2) => {
   return math.divide(num1, num2);
 };
 
-module.exports=  {add, sub, mult, div };
+module.exports = { add, sub, mult, div };
+
