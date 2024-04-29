@@ -4,13 +4,18 @@
   "description": "",
   "main": "index.js",
   "scripts": {
-    "test": "echo \"Error: no test specified\" && exit 1",
-    "dev": "nodemon .",
-    "start": "node ."
+    "test": "echo \"Error: no test specified\" && exit 1"
   },
   "keywords": [
     "node"
   ],
   "author": "Sneha <sneha.gupta@successive.tech>",
-  "license": "ISC"
+  "license": "ISC",
+  "dependencies": {
+    "lodash": "^4.17.21",
+    "readline-sync": "^1.4.10"
+  },
+  "devDependencies": {
+    "nodemon": "^3.1.0"
+  }
 }
