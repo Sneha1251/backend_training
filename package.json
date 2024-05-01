@@ -12,6 +12,8 @@
   "author": "Sneha <sneha.gupta@successive.tech>",
   "license": "ISC",
   "dependencies": {
+    "geoip-lite": "^1.4.10",
+    "joi": "^17.13.0",
     "lodash": "^4.17.21",
     "readline-sync": "^1.4.10",
     "cookie-parser": "^1.4.6",
