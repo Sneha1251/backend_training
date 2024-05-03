@@ -1,5 +1,6 @@
 const express = require("express");
 const createError = require("http-errors");
+require("dotenv").config();
 
 const validateRequest = require("../middlewares/validateRequest");
 const queryValidation = require("../middlewares/queryValidation");
@@ -14,6 +15,7 @@ const generateDummyToken = require("../middlewares/generateDummyToken");
 const requestLogger = require("../middlewares/logger");
 const errorHandler = require("../middlewares/errorHandler");
 const customHeader = require("../middlewares/customHeader");
+const rateLimiter = require("../middlewares/rateLimiter");
 
 const {
   middleware1,
@@ -25,6 +27,7 @@ const app = express();
 
 app.use(requestLogger);
 app.use(customHeader("MyCustomValue"));
+app.use(rateLimiter(1));
 
 app.get("/", (req, res) => {
   res.json({ message: "Welcome to Home Page" });
