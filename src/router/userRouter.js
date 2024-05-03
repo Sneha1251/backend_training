@@ -4,6 +4,8 @@ const validateRequest = require("../middlewares/validateRequest");
 const queryValidation = require("../middlewares/queryValidation");
 const locationValidation = require("../middlewares/locationValidation");
 
+const validationError = require("../middlewares/validationError");
+
 const app = express();
 
 app.post("/validate", validateRequest, (req, res) => {
@@ -26,13 +28,8 @@ app.get("/async-error", async (req, res, next) => {
   }
 });
 
-app.get("/validation/error/:id", (req, res, next) => {
-  const { id } = req.params;
-  if (!id || isNaN(id)) {
-    res.json("Id must be a number");
-  } else {
-    res.status(200).json({ message: "User details retreived successfully" });
-  }
+app.get("/validation/error/:id", validationError, (req, res) => {
+  res.status(200).json({ message: "User details retreived successfully" });
 });
 
 app.listen(5000, () => {
