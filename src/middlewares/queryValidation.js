@@ -10,4 +10,5 @@ const queryValidation = (req, res, next) => {
   }
   next();
 };
+
 module.exports = queryValidation;

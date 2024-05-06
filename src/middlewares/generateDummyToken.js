@@ -1,4 +1,5 @@
-const jwt=require('jsonwebtoken');
+const jwt = require("jsonwebtoken");
+
 const generateDummyToken = (req, res, next) => {
   const payload = {
     id: 1,

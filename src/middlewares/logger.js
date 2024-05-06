@@ -5,4 +5,5 @@ const requestLogger = (req, res, next) => {
   console.log(`[${timestamp}]  ${method}   ${url}`);
   next();
 };
+
 module.exports = requestLogger;
