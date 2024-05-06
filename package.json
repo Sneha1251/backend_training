@@ -12,15 +12,15 @@
   "author": "Sneha <sneha.gupta@successive.tech>",
   "license": "ISC",
   "dependencies": {
+    "cookie-parser": "^1.4.6",
+    "dotenv": "^16.4.5",
+    "express": "^4.19.2",
     "geoip-lite": "^1.4.10",
     "joi": "^17.13.0",
+    "jsonwebtoken": "^9.0.2",
     "lodash": "^4.17.21",
-    "readline-sync": "^1.4.10",
-    "cookie-parser": "^1.4.6",
-    "express": "^4.19.2",
-    "postman": "^0.2.0"
-  },
-  "devDependencies": {
-    "nodemon": "^3.1.0"
+    "nodemon": "^3.1.0",
+    "postman": "^0.2.0",
+    "readline-sync": "^1.4.10"
   }
 }

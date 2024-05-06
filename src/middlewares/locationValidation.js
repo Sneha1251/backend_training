@@ -15,4 +15,5 @@ const locationValidation = (req, res, next) => {
   }
   next();
 };
+
 module.exports = locationValidation;
