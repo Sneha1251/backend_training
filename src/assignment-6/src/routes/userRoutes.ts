@@ -35,6 +35,7 @@ import {
   errorCreated,
   asyncError,
   errorValidation,
+  HealthCheckController,
 } from "../controllers/userController";
 
 const app = express();
@@ -89,6 +90,9 @@ app.get("/async-error", obj11.createAsyncError);
 
 const obj12 = new errorValidation();
 app.get("/validation/error/:id", validationError, obj12.errorValidate);
+
+const obj13 = new HealthCheckController();
+app.get("/health", obj13.checkHealth);
 
 app.use(errorHandler);
 

@@ -46,6 +46,8 @@ const obj11 = new userController_1.asyncError();
 app.get("/async-error", obj11.createAsyncError);
 const obj12 = new userController_1.errorValidation();
 app.get("/validation/error/:id", validationError_1.default, obj12.errorValidate);
+const obj13 = new userController_1.HealthCheckController();
+app.get("/health", obj13.checkHealth);
 app.use(errorHandler_1.default);
 app.listen(5000, () => {
     console.log("server is running on port 5000");

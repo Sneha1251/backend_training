@@ -85,3 +85,9 @@ export class errorValidation {
     res.status(200).json({ message: "User details retreived successfully" });
   }
 }
+
+export class HealthCheckController {
+  checkHealth(req: Request, res: Response): void {
+    res.status(200).json({ message: "I am fine thankyou" });
+  }
+}
