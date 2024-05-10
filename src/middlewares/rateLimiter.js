@@ -4,7 +4,7 @@ const rateLimiter = (limit) => (req, res, next) => {
   const current = requests.get(ip) || 0;
 
   if (current >= limit) {
-    req.status(429).json({ error: "Too many Requests" });
+    res.status(429).json({ error: "Too many Requests" });
     return;
   }
 
