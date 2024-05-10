@@ -1,25 +1,41 @@
-import express, { Request, Response, NextFunction } from "express";
-import createError from "http-errors";
+import express from "express";
 import dotenv from "dotenv";
 dotenv.config();
 
 import validateRequest from "../middlewares/validateRequest";
 import queryValidation from "../middlewares/queryValidation";
 import locationValidation from "../middlewares/locationValidation";
-import { generateUsers } from "../generateDataFunction";
-import { generatePosts } from "../generateDataFunction";
+
 import jwtAuthentication from "../middlewares/jwtAuthentication";
 import generateDummyToken from "../middlewares/generateDummyToken";
+
 import requestLogger from "../middlewares/logger";
-import errorHandler from "../middlewares/errorHandler";
 import customHeader from "../middlewares/customHeader";
 import rateLimiter from "../middlewares/rateLimiter";
+
+import errorHandler from "../middlewares/errorHandler";
 import validationError from "../middlewares/validationError";
+
 import {
   middleware1,
   middleware2,
   middleware3,
 } from "../middlewares/middlewareChain";
+
+import {
+  homePage,
+  userValidation,
+  locationValidate,
+  queryValidate,
+  generateApiUser,
+  generateApiPost,
+  authenticateProtected,
+  authenticatePublic,
+  middlewareCheck,
+  errorCreated,
+  asyncError,
+  errorValidation,
+} from "../controllers/userController";
 
 const app = express();
 
@@ -27,71 +43,52 @@ app.use(requestLogger);
 app.use(customHeader("MyCustomValue"));
 app.use(rateLimiter(1));
 
-app.get("/", (req: Request, res: Response) => {
-  res.json({ message: "Welcome to Home Page" });
-});
+const obj1 = new homePage();
+app.get("/", obj1.mainPage);
 
-app.post("/validate", validateRequest, (req: Request, res: Response) => {
-  res.json({ message: "user validated!" });
-});
+const obj2 = new userValidation();
+app.post("/validate", validateRequest, obj2.validateUser);
 
-app.get("/location", locationValidation, (req: Request, res: Response) => {
-  res.json({ message: "user can access" });
-});
+const obj3 = new locationValidate();
+app.get("/location", locationValidation, obj3.validateLoco);
 
-app.post("/query/:id", queryValidation, (req: Request, res: Response) => {
-  res.json({ message: `user ${req.params.id}` });
-});
+const obj4 = new queryValidate();
+app.post("/query/:id", queryValidation, obj4.validateQuery);
 
-app.get("/api/users", (req: Request, res: Response) => {
-  const users = generateUsers();
-  res.json(users);
-});
+const obj5 = new generateApiUser();
+app.get("/api/users", obj5.generateUserApi);
 
-app.post("/api/posts", (req: Request, res: Response) => {
-  const posts = generatePosts();
-  res.json(posts);
-});
+const obj6 = new generateApiPost();
+app.post("/api/posts", obj6.generatePostApi);
 
+const obj7 = new authenticateProtected();
 app.get(
   "/authenticate/protected",
   generateDummyToken,
   jwtAuthentication,
-  (req: Request, res: Response) => {
-    res.json({ message: "Authentication successful" });
-  }
+  obj7.protectedAuth
 );
 
-app.get("/authenticate/public", (req: Request, res: Response) => {
-  res.json({ message: "This is a public route" });
-});
+const obj8 = new authenticatePublic();
+app.get("/authenticate/public", obj8.publicAuth);
 
-app.get("/middleware", middleware1, middleware2, middleware3, (req, res) => {
-  res.json("Middleware check Done");
-});
-
-app.get("/error-500", (req: Request, res: Response, next: NextFunction) => {
-  next(createError(500, "Internal server Error"));
-});
-
+const obj9 = new middlewareCheck();
 app.get(
-  "/async-error",
-  async (req: Request, res: Response, next: NextFunction) => {
-    try {
-      throw new Error("Async Error");
-    } catch (err) {
-      next(err);
-    }
-  }
+  "/middleware",
+  middleware1,
+  middleware2,
+  middleware3,
+  obj9.checkMiddleware
 );
 
-app.get(
-  "/validation/error/:id",
-  validationError,
-  (req: Request, res: Response) => {
-    res.status(200).json({ message: "User details retreived successfully" });
-  }
-);
+const obj10 = new errorCreated();
+app.get("/error-500", obj10.createError);
+
+const obj11 = new asyncError();
+app.get("/async-error", obj11.createAsyncError);
+
+const obj12 = new errorValidation();
+app.get("/validation/error/:id", validationError, obj12.errorValidate);
 
 app.use(errorHandler);
 
