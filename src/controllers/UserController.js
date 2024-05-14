@@ -1,17 +1,21 @@
-require("../assignment-8/config/db.js");
+const dbconnection = require("../assignment-8/config/db.js");
 const seedCountry = require("../assignment-8/seedCountry.js");
-const countrySchema = require("../models/countrySchema.js");
+const playingCountrySchema = require("../models/countrySchema.js");
 
-const countryPost = async (req, res) => {
-  const data = await countrySchema.create(req.body);
-  console.log("data added");
-  res.status(200).send(data);
-};
+dbconnection();
+class Country {
+  async postCountry(req, res) {
+    const data = await playingCountrySchema.create(seedCountry);
+    console.log("data added");
+    res.status(200).send(data);
+  }
 
-const countryGet = async (req, res) => {
-  const data = await countrySchema.find();
-  console.log("data presented");
-  res.status(200).send(data);
-};
+  async getCountry(req, res) {
+    const data = await playingCountrySchema.find();
+    console.log("data presented");
+    res.status(200).send(data);
+  }
+}
 
-module.exports = { countryGet, countryPost };
+const country = new Country();
+module.exports = country;
