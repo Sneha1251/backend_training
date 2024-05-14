@@ -12,7 +12,7 @@ var __importDefault = (this && this.__importDefault) || function (mod) {
     return (mod && mod.__esModule) ? mod : { "default": mod };
 };
 Object.defineProperty(exports, "__esModule", { value: true });
-exports.errorValidation = exports.asyncError = exports.errorCreated = exports.middlewareCheck = exports.authenticatePublic = exports.authenticateProtected = exports.generateApiPost = exports.generateApiUser = exports.queryValidate = exports.locationValidate = exports.userValidation = exports.homePage = void 0;
+exports.HealthCheckController = exports.errorValidation = exports.asyncError = exports.errorCreated = exports.middlewareCheck = exports.authenticatePublic = exports.authenticateProtected = exports.generateApiPost = exports.generateApiUser = exports.queryValidate = exports.locationValidate = exports.userValidation = exports.homePage = void 0;
 const http_errors_1 = __importDefault(require("http-errors"));
 const generateDataFunction_1 = require("../generateDataFunction");
 const generateDataFunction_2 = require("../generateDataFunction");
@@ -97,3 +97,9 @@ class errorValidation {
     }
 }
 exports.errorValidation = errorValidation;
+class HealthCheckController {
+    checkHealth(req, res) {
+        res.status(200).json({ message: "I am fine thankyou" });
+    }
+}
+exports.HealthCheckController = HealthCheckController;
