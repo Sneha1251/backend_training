@@ -1,16 +1,20 @@
 const express = require("express");
 
-const { userFind, userInsert } = require("../controllers/UserController.js");
-
+const commerce = require("../controllers/UserController.js");
 const commerceValidation = require("../middlewares/commerceValidation.js");
+const country = require("../controllers/UserController.js");
 
 const app = express();
 app.use(express.json());
 
-app.post("/commerce/post", commerceValidation, userInsert);
+app.post("/commerce/post", commerceValidation, commerce.userInsert);
 
-app.get("/commerce/get", userFind);
+app.get("/commerce/get", commerce.userFind);
+
+app.post("/country/add", country.postCountry);
+
+app.get("/country/get", country.getCountry);
 
 app.listen(5000, () => {
-  console.log("Server is running on 5000");
+  console.log("Server running on port no 5000");
 });
