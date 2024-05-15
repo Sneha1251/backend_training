@@ -39,4 +39,5 @@ class Country {
 }
 const commerce = new Commerce();
 const country = new Country();
+
 module.exports = { commerce, country };

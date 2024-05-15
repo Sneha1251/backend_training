@@ -1,6 +1,6 @@
 const mongoose = require("mongoose");
 
-const dbconnection = async () => {
+const dbconnections = async () => {
   try {
     await mongoose.connect("mongodb://127.0.0.1:27017/e-commerce");
     console.log("MongoDB Connected");
@@ -9,4 +9,4 @@ const dbconnection = async () => {
   }
 };
 
-module.exports = dbconnection;
+module.exports = dbconnections;
