@@ -1,9 +1,15 @@
 const express = require("express");
 
+const commerce = require("../controllers/UserController.js");
+const commerceValidation = require("../middlewares/commerceValidation.js");
 const country = require("../controllers/UserController.js");
 
 const app = express();
 app.use(express.json());
+
+app.post("/commerce/post", commerceValidation, commerce.userInsert);
+
+app.get("/commerce/get", commerce.userFind);
 
 app.post("/country/add", country.postCountry);
 
