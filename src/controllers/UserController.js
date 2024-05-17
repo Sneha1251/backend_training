@@ -69,7 +69,7 @@ class Authentication {
     const { username, email, password } = req.body;
 
     const user = await customerSchema.findOne({ username: username });
-    
+
     if (!user) {
       return res.status(404).send("User not found");
     }
@@ -89,6 +89,10 @@ class Authentication {
   }
 
   getData(req, res) {
+    if (!req.user) {
+      return res.status(404).send("User not found");
+    }
+
     res.send(`${req.user.user.username}, You are validate`);
   }
 }
