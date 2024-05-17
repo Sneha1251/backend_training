@@ -90,7 +90,10 @@ class Authentication {
   }
 
   dashboard(req, res) {
-    res.send(
+    if (!req.user) {
+      return res.status(404).send("User not found");
+    }
+    return res.send(
       `${req.user.user.username}, Welcome to dashboard!  You are valid user`
     );
   }
