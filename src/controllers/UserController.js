@@ -69,6 +69,10 @@ class Authentication {
     const { username, email, password } = req.body;
 
     const user = await customerSchema.findOne({ username: username });
+    
+    if (!user) {
+      return res.status(404).send("User not found");
+    }
 
     const validPassword = await bcrypt.compare(password, user.password);
 
