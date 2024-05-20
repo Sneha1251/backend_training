@@ -7,9 +7,13 @@ const {
   authentication,
 } = require("../controllers/UserController.js");
 const commerceValidation = require("../middlewares/commerceValidation.js");
+const country = require("../controllers/UserController.js");
+const security = require("../middlewares/security.js");
 
 const app = express();
 app.use(express.json());
+app.use(helmet());
+app.use(security.setHeaders);
 
 app.post("/customer/signup", authentication.signup);
 
