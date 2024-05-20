@@ -12,6 +12,7 @@
   "author": "Sneha <sneha.gupta@successive.tech>",
   "license": "ISC",
   "dependencies": {
+    "bcrypt": "^5.1.1",
     "cookie-parser": "^1.4.6",
     "express": "^4.19.2",
     "geoip-lite": "^1.4.10",

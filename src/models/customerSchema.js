@@ -1,0 +1,30 @@
+const mongoose = require("mongoose");
+
+const customerSchema = new mongoose.Schema({
+  username: {
+    type: String,
+    required: true,
+  },
+  email: {
+    type: String,
+    required: true,
+    unique: true,
+    validate: {
+      validator: (value) => {
+        return /^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(value);
+      },
+      message: "Invalid email address format",
+    },
+  },
+  password: {
+    type: String,
+    required: true,
+  },
+  roles: {
+    type: String,
+    enum: ["user", "admin"],
+    default: "user",
+  },
+});
+
+module.exports = mongoose.model("user", customerSchema);
